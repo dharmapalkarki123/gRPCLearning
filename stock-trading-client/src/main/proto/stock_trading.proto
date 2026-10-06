@@ -10,6 +10,7 @@ service StockTradingService{
   //unary RPC -> get current stock price
   rpc getStockPrice(StockRequest) returns (StockResponse);
   // server streaming
+  rpc subscribeStockPrice(StockRequest) returns(stream StockResponse);
 
 }
 
