@@ -12,7 +12,26 @@ service StockTradingService{
   // server streaming
   rpc subscribeStockPrice(StockRequest) returns(stream StockResponse);
 
+  //Client streaming - place multiple stock orders
+  rpc bulkStockOrder(stream StockOrder) returns (OrderSummary);
+
 }
+
+
+message StockOrder{
+  string order_id=1;
+  string stock_symbol=2;
+  int32 quantity=3;
+  double price=4;
+  string order_type=5;// BUY or SELL
+}
+
+message OrderSummary{
+  int32  total_orders=1;
+  double total_amount=2;
+  int32 success_count=3;
+}
+
 
 message StockRequest{
   string stock_symbol=1;
