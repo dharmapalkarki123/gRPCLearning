@@ -15,7 +15,24 @@ service StockTradingService{
   //Client streaming - place multiple stock orders
   rpc bulkStockOrder(stream StockOrder) returns (OrderSummary);
 
+  //Bidrectional streaming
+  rpc liveTrading(stream StockOrder) returns(stream TradeStatus);
+
+
+
+
+
+
 }
+
+message TradeStatus{
+  string order_id=1;
+  string status=2;
+  string message=3;
+  string timeStamp=4;
+}
+
+
 
 
 message StockOrder{
